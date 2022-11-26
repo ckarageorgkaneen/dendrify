@@ -21,4 +21,5 @@ d.start_scope()
 name, size, etc. should all be defined explicitly upon construction, just like one does for NeuronGroup.
 - Replace printing with logging (see https://stackoverflow.com/a/6918596)
 - Replace sys.exit() with raising a case-specific error
-- 
+- Allow single-compartment neurons
+- Make `pre` an arg (mandatory)
