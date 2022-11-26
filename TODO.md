@@ -1,5 +1,11 @@
 TODOs:
 
+- Add paper-figures requirements.txt:
+	git-lfs
+	networkx
+	seaborn
+	scipy
+	statsmodels
 - Encapsulate brian objects in the same way brian encapsulates other libraries (e.g. numpy, matplotlib)
 e.g.
 ```python
