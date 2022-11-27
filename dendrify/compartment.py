@@ -87,9 +87,9 @@ class Compartment:
         """
         # Pick a model template or provide a custom model:
         if model in library:
-            self._equations = library[model].format('_'+self.name)
+            self._equations = library[model].format('_' + self.name)
         else:
-            self._equations = model.format('_'+self.name)
+            self._equations = model.format('_' + self.name)
 
     def connect(self, other: Compartment,
                 g: Union[Quantity, str] = 'half_cylinders'):
@@ -136,8 +136,8 @@ class Compartment:
                      self.name, other.name)
 
         # Add them to their respective compartments:
-        self._equations += '\n'+I_forward
-        other._equations += '\n'+I_backward
+        self._equations += '\n' + I_forward
+        other._equations += '\n' + I_backward
 
         # Include them to the I variable (I_ext -> Inj + new_current):
         self_change = f'= I_ext_{self.name}'
@@ -242,7 +242,7 @@ class Compartment:
         to_replace = f'= I_ext_{self.name}'
         self._equations = self._equations.replace(
             to_replace, f'{to_replace} + {current_name}')
-        self._equations += '\n'+current_eqs
+        self._equations += '\n' + current_eqs
 
         if not self._params:
             self._params = {}
@@ -261,8 +261,8 @@ class Compartment:
                 norm_factor = Compartment.g_norm_factor(t_rise, t_decay)
                 self._params[f'g_{channel}_{pre}_{self.name}'] *= norm_factor
 
-    def noise(self, tau: Quantity = 20*ms, sigma: Quantity = 3*pA,
-              mean: Quantity = 0*pA):
+    def noise(self, tau: Quantity = 20 * ms, sigma: Quantity = 3 * pA,
+              mean: Quantity = 0 * pA):
         """
         Adds a stochastic noise current. For more information see the Noise
         section: of :doc:`brian2:user/models`
@@ -281,7 +281,7 @@ class Compartment:
         to_change = f'= I_ext_{self.name}'
         self._equations = self._equations.replace(
             to_change, f'{to_change} + {I_noise_name}')
-        self._equations += '\n'+noise_eqs
+        self._equations += '\n' + noise_eqs
 
         # Add _params:
         if not self._params:
@@ -399,11 +399,11 @@ class Compartment:
 
     @staticmethod
     def g_norm_factor(trise: Quantity, tdecay: Quantity):
-        tpeak = (tdecay*trise / (tdecay-trise)) * np.log(tdecay/trise)
-        factor = (((tdecay*trise) / (tdecay-trise))
-                  * (-np.exp(-tpeak/trise) + np.exp(-tpeak/tdecay))
+        tpeak = (tdecay * trise / (tdecay - trise)) * np.log(tdecay / trise)
+        factor = (((tdecay * trise) / (tdecay - trise))
+                  * (-np.exp(-tpeak / trise) + np.exp(-tpeak / tdecay))
                   / ms)
-        return 1/factor
+        return 1 / factor
 
 
 class Soma(Compartment):

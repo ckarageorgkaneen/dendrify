@@ -291,7 +291,7 @@ class NeuronModel:
         # When model parameters are passed as dict to the NeuronGroup:
         if self._namespace:
             commands = [command.format(self._linked_neurongroup[0], i.name,
-                                       repr(self._namespace['EL_'+i.name]))
+                                       repr(self._namespace['EL_' + i.name]))
                         for i in self._compartments]
         executable = '\n'.join(commands)
         if verbose:
@@ -384,14 +384,14 @@ class NeuronModel:
         for d in ['right', 'top', 'left', 'bottom']:
             ax.spines[d].set_visible(False)
         pos = nx.spring_layout(G, fixed=soma, pos={soma[0]: (0, 0)},
-                               k=0.05*scale_edges, iterations=100,
+                               k=0.05 * scale_edges, iterations=100,
                                seed=seed)
         nx.draw_networkx_nodes(G, pos, nodelist=dendrites,
                                node_color=color_dendrites,
-                               node_size=1200*scale_nodes, margins=0.1,
+                               node_size=1200 * scale_nodes, margins=0.1,
                                ax=ax, alpha=alpha)
         nx.draw_networkx_nodes(G, pos, nodelist=soma, node_color=color_soma,
-                               node_size=1200*scale_nodes, ax=ax, alpha=alpha)
+                               node_size=1200 * scale_nodes, ax=ax, alpha=alpha)
         nx.draw_networkx_edges(G, pos, alpha=0.5, width=1, ax=ax)
         nx.draw_networkx_labels(G, pos, ax=ax, font_color=fontcolor,
                                 font_size=fontsize)

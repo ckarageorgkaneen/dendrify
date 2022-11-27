@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from math import pi
-from typing import List, Optional, Tuple, Union
+from typing import Optional
 
 from brian2.units import Quantity
 
@@ -93,7 +93,7 @@ class EphysProperties(object):
             return pi * self.length * self.diameter * self.total_area_factor
         except TypeError:
             print(("ERROR: Missing Parameters ('length' or 'diameter')\n"
-                  f"Could not calculate the area of <{self.name}>, "
+                   f"Could not calculate the area of <{self.name}>, "
                    "returned None instead\n"))
 
     @property
@@ -110,7 +110,7 @@ class EphysProperties(object):
             return self.area * self.cm
         except TypeError:
             print(("ERROR: Missing Parameters ('cm')\n"
-                  f"Could not calculate the capacitance of <{self.name}>, "
+                   f"Could not calculate the capacitance of <{self.name}>, "
                    "returned None instead"))
 
     @property
@@ -127,7 +127,7 @@ class EphysProperties(object):
             return self.area * self.gl
         except TypeError:
             print(("ERROR: Missing Parameters ('gl')\n"
-                  f"Could not calculate the g_leakage of <{self.name}>, "
+                   f"Could not calculate the g_leakage of <{self.name}>, "
                    "returned None instead"))
 
     @property
@@ -178,13 +178,13 @@ class EphysProperties(object):
         :class:`~brian2.units.fundamentalunits.Quantity`
         """
         try:
-            ri = (4*self.r_axial*self.length) / (pi*self.diameter**2)
+            ri = (4 * self.r_axial * self.length) / (pi * self.diameter**2)
         except TypeError:
             print(("ERROR: Missing Parameters <length / diameter / r_axial>\n"
-                  f"Could not calculate the g_cylinder of <{self.name}>, "
+                   f"Could not calculate the g_cylinder of <{self.name}>, "
                    "returned None instead."))
         else:
-            return 1/ri
+            return 1 / ri
 
     @staticmethod
     def g_couple(comp1: EphysProperties, comp2: EphysProperties) -> Quantity:
@@ -207,10 +207,10 @@ class EphysProperties(object):
         try:
             r1 = (4 * comp1.r_axial * comp1.length) / (pi * comp1.diameter**2)
             r2 = (4 * comp2.r_axial * comp2.length) / (pi * comp2.diameter**2)
-            ri = (r1+r2) / 2
+            ri = (r1 + r2) / 2
         except TypeError:
             print(("ERROR: Missing Parameters <length / diameter / r_axial>\n"
                    f"Could not calculate the g_couple of <{comp1.name}> "
                    f"& <{comp2.name}>, returned None instead."))
         else:
-            return 1/ri
+            return 1 / ri
